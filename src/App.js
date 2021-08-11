@@ -3,9 +3,10 @@ import data from "./birthdaydata";
 import BirthdayList from "./BirthdayList";
 
 function App() {
-  const [people, setPeople] = React.useState(data);  
-  const refreshPage = () => {
-    window.location.reload();
+  const [people, setPeople] = React.useState(data);
+  const refreshPage = () => {    
+    setPeople(data);
+    // window.location.reload();
   };
   return (
     <main>
