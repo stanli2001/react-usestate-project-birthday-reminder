@@ -17,8 +17,8 @@ function App() {
   //Add Month and Day of DOB to the person array
   //Create filtered array, which is the list of person whose birthday is today
   //return the filtered array for display
-  const filterPeople = () => {
-    const newPeople = people.map((person) => ({
+  const filterPeople = (peopledata) => {
+    const newPeople = peopledata.map((person) => ({
       ...person,
       dobmonth: getMonth(person.DOB),
       dobday: getDay(person.DOB),
@@ -34,10 +34,10 @@ function App() {
   };
 
   useEffect(() => {
-    filterPeople();
+    filterPeople(data);
   },[]);
   const refreshPage = () => {
-    setPeople(data);
+    filterPeople(data);
     // window.location.reload();
   };
   return (
@@ -52,7 +52,7 @@ function App() {
         >
           Clear All
         </button>
-        {/* <button onClick={refreshPage}>Restore</button> */}
+        <button onClick={refreshPage}>Restore</button>
       </section>
     </main>
   );
