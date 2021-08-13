@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import data from "./birthdaydata";
 import BirthdayList from "./BirthdayList";
 
 function App() {
-  const [people, setPeople] = useState(data);
+  
+  const [people, setPeople] = useState([]);
   //Exact Month from DOB
   const getMonth = (date) => {
     const birthday = new Date(date);
@@ -17,8 +18,8 @@ function App() {
   //Add Month and Day of DOB to the person array
   //Create filtered array, which is the list of person whose birthday is today
   //return the filtered array for display
-  const filterPeople = (peopledata) => {
-    const newPeople = peopledata.map((person) => ({
+  const filterPeople = useCallback(() => {    
+    const newPeople = data.map((person) => ({
       ...person,
       dobmonth: getMonth(person.DOB),
       dobday: getDay(person.DOB),
@@ -31,13 +32,13 @@ function App() {
     );
 
     setPeople(filteredPeople);
-  };
+  },[]);
 
   useEffect(() => {
-    filterPeople(data);
-  },[]);
+    filterPeople();
+  }, [filterPeople]);
   const refreshPage = () => {
-    filterPeople(data);
+    filterPeople();
     // window.location.reload();
   };
   return (

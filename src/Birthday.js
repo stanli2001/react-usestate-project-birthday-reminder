@@ -1,7 +1,7 @@
 import React from "react";
 
 const Birthday = ({ person }) => {
-  const { name, image, DOB, dobmonth } = person;
+  const { name, image, DOB } = person;
   const getAge = (dob) => {
     // [1] new Date(dateString)
     const birthday = new Date(dob); // transform birthday in date-object
@@ -21,7 +21,7 @@ const Birthday = ({ person }) => {
     // age = year if person was born in 1970 (= 1989) - 1970 = 19
     return Math.abs(ageDate.getUTCFullYear() - 1970);
   };
-  console.log(getAge(DOB));
+
   const age = getAge(DOB);
   return (
     <>
