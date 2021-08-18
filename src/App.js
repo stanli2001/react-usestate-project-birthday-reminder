@@ -4,8 +4,7 @@ import BirthdayList from "./BirthdayList";
 import Wish from "./Wish";
 
 function App() {
-  const [people, setPeople] = useState([]);
-  const [show, setShow] = useState(false);
+  const [people, setPeople] = useState([]);  
 
   //Exact Month from DOB
   const getMonth = (date) => {
