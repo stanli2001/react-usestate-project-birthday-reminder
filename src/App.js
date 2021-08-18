@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import data from "./birthdaydata";
 import BirthdayList from "./BirthdayList";
+import Wish from "./Wish";
 
 function App() {
-  
   const [people, setPeople] = useState([]);
+  const [show, setShow] = useState(false);
+
   //Exact Month from DOB
   const getMonth = (date) => {
     const birthday = new Date(date);
@@ -18,7 +20,7 @@ function App() {
   //Add Month and Day of DOB to the person array
   //Create filtered array, which is the list of person whose birthday is today
   //return the filtered array for display
-  const filterPeople = useCallback(() => {    
+  const filterPeople = useCallback(() => {
     const newPeople = data.map((person) => ({
       ...person,
       dobmonth: getMonth(person.DOB),
@@ -32,7 +34,7 @@ function App() {
     );
 
     setPeople(filteredPeople);
-  },[]);
+  }, []);
 
   useEffect(() => {
     filterPeople();
@@ -41,6 +43,7 @@ function App() {
     filterPeople();
     // window.location.reload();
   };
+
   return (
     <main>
       <section className="container">
@@ -54,6 +57,7 @@ function App() {
           Clear All
         </button>
         <button onClick={refreshPage}>Restore</button>
+        {people.length > 0 && <Wish />}
       </section>
     </main>
   );
